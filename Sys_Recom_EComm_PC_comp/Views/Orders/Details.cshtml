@@ -1,0 +1,51 @@
+﻿@model Sys_Recom_EComm_PC_comp.Models.Order
+
+@{
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+    <div>
+        <h4>Order</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProductID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ProductID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PaymentID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PaymentID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ShipperID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ShipperID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Customer)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Customer.CustomerID)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.OrderID">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</body>
+</html>

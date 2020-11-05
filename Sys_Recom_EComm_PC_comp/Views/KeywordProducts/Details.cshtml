@@ -1,0 +1,39 @@
+﻿@model Sys_Recom_EComm_PC_comp.Models.KeywordProduct
+
+@{
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+    <div>
+        <h4>KeywordProduct</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ProductID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ProductID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.KeywordID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.KeywordID)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.KeywordProductID">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</body>
+</html>

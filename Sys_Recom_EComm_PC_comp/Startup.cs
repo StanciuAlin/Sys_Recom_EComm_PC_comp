@@ -35,7 +35,11 @@ namespace Sys_Recom_EComm_PC_comp
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-            
+
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=SysRecomDB;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<ApplicationDbContext>
+                    (options => options.UseSqlServer(connection));
+
             services.AddRazorPages();
             services.AddMvc(o =>
             {

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Sys_Recom_EComm_PC_comp.Models.UserProfile>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeywordID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Searches)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KeywordID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Searches)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.UserProfileID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.UserProfileID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.UserProfileID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

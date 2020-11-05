@@ -1,0 +1,44 @@
+﻿@model Sys_Recom_EComm_PC_comp.Models.KeywordProduct
+
+@{
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+    <h4>KeywordProduct</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ProductID" class="control-label"></label>
+                    <input asp-for="ProductID" class="form-control" />
+                    <span asp-validation-for="ProductID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="KeywordID" class="control-label"></label>
+                    <input asp-for="KeywordID" class="form-control" />
+                    <span asp-validation-for="KeywordID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+</body>
+</html>

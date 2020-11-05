@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Sys_Recom_EComm_PC_comp.Models.Order>
+
+@{
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PaymentID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ShipperID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipperID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.CustomerID)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
