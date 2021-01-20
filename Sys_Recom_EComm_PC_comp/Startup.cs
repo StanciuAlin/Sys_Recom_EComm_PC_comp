@@ -14,6 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Sys_Recom_EComm_PC_comp.Interfaces;
+using Sys_Recom_EComm_PC_comp.Repository;
+using Sys_Recom_EComm_PC_comp.Services;
 
 namespace Sys_Recom_EComm_PC_comp
 {
@@ -36,9 +39,18 @@ namespace Sys_Recom_EComm_PC_comp
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=SysRecomDB;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=aspnet-Sys_Recom_EComm_PC_comp-BC97BD21-2183-4A26-B36E-AC7FEC3BA489;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<ApplicationDbContext>
                     (options => options.UseSqlServer(connection));
+
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ProductService>();
+
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<CustomerService>();
+
+            services.AddScoped<IInteractionRepository, InteractionRepository>();
+
 
             services.AddRazorPages();
             services.AddMvc(o =>

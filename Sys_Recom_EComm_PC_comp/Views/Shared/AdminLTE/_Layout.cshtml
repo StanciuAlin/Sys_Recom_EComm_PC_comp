@@ -48,5 +48,66 @@
         <partial name="AdminLTE/_Footer" />
     </div>
     <partial name="AdminLTE/_Scripts" />
+
+
+    @* Pop-up menu after successful login *@
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script>
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, '\\$&');
+                var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            }
+
+            if (getParameterByName('loggedIn') === 'true') {
+                $("#login-confirmation-modal").modal('toggle');
+            }
+        </script>
+    }
+
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+
+        function setActiveLink() {
+            var currentPath = window.location.pathname;
+            var currentMenuItem = 'Home';
+            if (currentPath != '/') {
+                currentMenuItem = currentPath.split('/')[2];
+            }
+            $('#nav-menu .nav-item a').removeClass('active');
+            $('.login-section a').removeClass('active');
+
+            $('#nav-menu .nav-item a').each(function () {
+                var $this = $(this);
+                var text = $this.text().replace(' ', '');
+                if (text == currentMenuItem) {
+                    $this.parent().addClass('active');
+                }
+            });
+
+            $('.login-section a').each(function () {
+                var $this = $(this);
+                var text = $this.text().replace(' ', '');
+                if (text == currentMenuItem) {
+                    $this.parent().addClass('active');
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            setActiveLink();
+        });
+    </script>
 </body>
 </html>

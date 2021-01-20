@@ -14,5 +14,6 @@ namespace Sys_Recom_EComm_PC_comp.Models
         public Guid ShipperID { get; set; }
         public Customer Customer { get; set; }
         public ICollection<Product> Products { get; set; }
+        public DateTime TransactionDate { get; set; }
     }
 }

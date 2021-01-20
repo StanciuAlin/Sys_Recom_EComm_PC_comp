@@ -13,6 +13,7 @@ namespace Sys_Recom_EComm_PC_comp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly Category category;
 
         public HomeController(ILogger<HomeController> logger)
         {

@@ -15,7 +15,7 @@ namespace Sys_Recom_EComm_PC_comp.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -82,6 +82,10 @@ namespace Sys_Recom_EComm_PC_comp.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -133,6 +137,8 @@ namespace Sys_Recom_EComm_PC_comp.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -308,6 +314,28 @@ namespace Sys_Recom_EComm_PC_comp.Data.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("Sys_Recom_EComm_PC_comp.Models.Interaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CustomerID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerID");
+
+                    b.ToTable("Interaction");
+                });
+
             modelBuilder.Entity("Sys_Recom_EComm_PC_comp.Models.Keyword", b =>
                 {
                     b.Property<Guid>("KeywordID")
@@ -359,6 +387,9 @@ namespace Sys_Recom_EComm_PC_comp.Data.Migrations
 
                     b.Property<Guid>("ShipperID")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("TransactionDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("OrderID");
 
@@ -496,9 +527,7 @@ namespace Sys_Recom_EComm_PC_comp.Data.Migrations
 
             modelBuilder.Entity("Sys_Recom_EComm_PC_comp.Models.UserProfile", b =>
                 {
-                    b.Property<Guid>("UserProfileID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<Guid>("CustomerID")
                         .HasColumnType("uniqueidentifier");
@@ -509,9 +538,13 @@ namespace Sys_Recom_EComm_PC_comp.Data.Migrations
                     b.Property<Guid>("Searches")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("UserProfileID");
+                    b.Property<string>("UserPhoto")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("UserProfiles");
+                    b.Property<Guid>("UserProfileID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasDiscriminator().HasValue("UserProfile");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -570,6 +603,15 @@ namespace Sys_Recom_EComm_PC_comp.Data.Migrations
                     b.HasOne("Sys_Recom_EComm_PC_comp.Models.Review", "Review")
                         .WithMany("Customers")
                         .HasForeignKey("ReviewID");
+                });
+
+            modelBuilder.Entity("Sys_Recom_EComm_PC_comp.Models.Interaction", b =>
+                {
+                    b.HasOne("Sys_Recom_EComm_PC_comp.Models.Customer", null)
+                        .WithMany("Interactions")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Sys_Recom_EComm_PC_comp.Models.Order", b =>
