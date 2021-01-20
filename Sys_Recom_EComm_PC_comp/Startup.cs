@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Sys_Recom_EComm_PC_comp.Interfaces;
 using Sys_Recom_EComm_PC_comp.Repository;
 using Sys_Recom_EComm_PC_comp.Services;
+using Sys_Recom_EComm_PC_comp.Models;
 
 namespace Sys_Recom_EComm_PC_comp
 {
@@ -35,8 +35,8 @@ namespace Sys_Recom_EComm_PC_comp
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
             var connection = @"Server=(localdb)\mssqllocaldb;Database=aspnet-Sys_Recom_EComm_PC_comp-BC97BD21-2183-4A26-B36E-AC7FEC3BA489;Trusted_Connection=True;ConnectRetryCount=0";
@@ -51,6 +51,8 @@ namespace Sys_Recom_EComm_PC_comp
 
             services.AddScoped<IInteractionRepository, InteractionRepository>();
 
+            services.AddIdentity<UserProfile, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddRazorPages();
             services.AddMvc(o =>
@@ -68,7 +70,7 @@ namespace Sys_Recom_EComm_PC_comp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                //app.UseDatabaseErrorPage();
             }
             else
             {
