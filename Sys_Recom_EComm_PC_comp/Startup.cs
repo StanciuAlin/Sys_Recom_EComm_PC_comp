@@ -35,11 +35,11 @@ namespace Sys_Recom_EComm_PC_comp
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=aspnet-Sys_Recom_EComm_PC_comp-BC97BD21-2183-4A26-B36E-AC7FEC3BA489;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=Sys_Recom_EComm_PC_comp;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<ApplicationDbContext>
                     (options => options.UseSqlServer(connection));
 
